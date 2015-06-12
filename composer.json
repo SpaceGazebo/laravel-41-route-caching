@@ -23,7 +23,7 @@
     },
     "replace":{
         "maartenstaa/laravel-41-route-caching":"dev-master"
-    }
+    },
     "autoload-dev": {
         "psr-4": {
             "MaartenStaa\\Routing\\": "tests/"
