@@ -47,6 +47,13 @@ class Router extends LaravelRouter
      * @var string
      */
     protected $cacheVersion = 'v1';
+    
+    /**
+     * Allows multiple/conditional/seperate cache buckets
+     *
+     * @var string
+     */
+    protected $cacheKeyPrefix = 'routes.cache';
 
     /**
      * Create a new Router instance.
@@ -113,7 +120,12 @@ class Router extends LaravelRouter
      */
     protected function getCacheKey($filename)
     {
-        return 'routes.cache.'.$this->cacheVersion.'.'.md5($filename).filemtime($filename);
+        return $this->cacheKeyPrefix.'.'.$this->cacheVersion.'.'.md5($filename).filemtime($filename);
+    }
+    
+    public function setCacheKeyPrefix($prefix)
+    {
+        $this->cacheKeyPrefix = $prefix;
     }
 
     /**
