@@ -41,8 +41,18 @@ In your `app/routes.php` file, or any other file you use that defines routes, wr
 the definition of your routes in a call to `Route::cache` as follows:
 
 ```php
-Route::cache(__FILE__, function() {
+// I'm not using Route:: in the form of a facade,
+// I'm just copying L5 while still using 4.2
+// Route:: should work the same
+$router = $app['router'];
+
+//optional
+$router->setCacheKeyPrefix('routes.cache.'.$clientId);
+
+$router->cache(__FILE__, function($router)
+{
 	// Define your routes here.
+	$router->get('home',['as'=>'home','HomeController@index']);
 });
 ```
 
